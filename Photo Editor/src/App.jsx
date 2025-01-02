@@ -54,9 +54,19 @@ function App() {
               <img
                 src="./src/assets/image-placeholder.svg"/>
           </div>
+          {/* right section ends here... */}
 
         </div>  
         {/* Main content div ends here... */}
+
+        {/* last div */}
+
+        <div>
+          <button>Reset Filters</button>
+          <button>Choose Image</button>
+          <button>Save Image</button>
+        </div>
+
 
       </div>
       {/* Start div ends here */}
