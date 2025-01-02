@@ -1,1 +1,1 @@
-"# Photo-Editor-in-React" 
+# Photo-Editor-in-React 
