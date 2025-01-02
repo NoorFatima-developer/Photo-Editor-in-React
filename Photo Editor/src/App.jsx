@@ -51,7 +51,8 @@ function App() {
 
           {/* Right Section */}
           <div>
-              <img src="" alt="preview-img"></img>
+              <img
+                src="image-placeholder.svg"/>
           </div>
 
         </div>  
