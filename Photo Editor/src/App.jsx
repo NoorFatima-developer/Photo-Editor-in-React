@@ -19,10 +19,12 @@ function App() {
 
           <div>
             <p>Filters</p>
+            <div>
             <button>Brightness</button> 
             <button>Saturation</button> 
             <button>Inversion</button> 
             <button>Grayscale</button> 
+            </div>
           </div>
 
           {/* Brightness wali div */}
@@ -34,9 +36,15 @@ function App() {
 
           {/* Rotate and Flip wali div */}
 
-          
-
-
+          <div>
+          <p>Rotate & Flip</p>
+              <div>
+                  <button><i class = "fa-solid fa-rotate-left"></i></button>
+                  <button><i class = "fa-solid fa-rotate-right"></i></button>
+                  <button><i class='bx bx-reflect-vertical'></i></button>
+                  <button><i class='bx bx-reflect-horizontal'></i></button>
+              </div>   
+          </div>
 
 
 
