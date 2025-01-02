@@ -52,7 +52,7 @@ function App() {
           {/* Right Section */}
           <div>
               <img
-                src="image-placeholder.svg"/>
+                src="./src/assets/image-placeholder.svg"/>
           </div>
 
         </div>  
