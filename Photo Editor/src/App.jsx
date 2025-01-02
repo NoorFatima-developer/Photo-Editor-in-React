@@ -8,7 +8,25 @@ function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <div>
+        <h2>Easy Image Editor</h2>
+        {/* Main Content */}
+        <div>
+          {/* Left Section */}
+          <div>
+            <p>Filters</p>
+            <button>Brightness</button> 
+            <button>Saturation</button> 
+            <button>Inversion</button> 
+            <button>Grayscale</button> 
+          </div>
+          {/* Right Section */}
+          <div>
+
+          </div>
+        </div>
+
+      </div>
     </>
   )
 }
