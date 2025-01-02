@@ -46,16 +46,12 @@ function App() {
               </div>   
           </div>
 
-
-
-
           </div>
           {/* left section ends here... */}
 
-
           {/* Right Section */}
           <div>
-
+              <img src="" alt="preview-img"></img>
           </div>
 
         </div>  
