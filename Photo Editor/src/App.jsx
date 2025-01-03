@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useRef} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
 
-  const [isDisabled, setisDisabled] = useState("false");
+  const fileInput = useRef(null)
 
-  function toggleDisable(){
-    setisDisabled(!isDisabled);
+  function handleChooseImage(){
+    fileInput.current.click()
   }
-
 
   return (
     <>
@@ -74,8 +73,8 @@ function App() {
         <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
           <button className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
           <div className='space-x-2'>
-          <input type="file" accept="image/*"/>
-          <button onClick={toggleDisable} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
+          <input type="file" accept="image/*" ref={fileInput} hidden/>
+          <button onClick={handleChooseImage} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
           <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px]'>Save Image</button>
           </div>  
         </div>
