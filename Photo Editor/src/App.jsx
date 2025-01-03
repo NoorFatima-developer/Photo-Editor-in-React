@@ -1,4 +1,4 @@
-import { useRef} from 'react'
+import { useRef, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,12 +6,19 @@ import './App.css'
 function App() {
 
   const fileInput = useRef(null)
+  const [selectedFile, setSelectedFile] = useState(0)
 
   function handleChooseImage(){
     fileInput.current.click()
   }
 
+  const loadImage = (e) => {
+    const file = e.target.files[0]
+    setSelectedFile(file)
+  }
+
   return (
+
     <>
      <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg ' >
      <div className='w-full mx-8 mt-10'>
@@ -58,11 +65,13 @@ function App() {
           {/* left section ends here... */}
 
           {/* Right Section */}
-          <div className='w-full pl-4 '>
-              <img
-                src="./src/assets/image-placeholder.svg"
-                className='w-full h-auto max-w-none object-cover'/>
-          </div>
+         {selectedFile && (
+           <div className='w-full pl-4 '>
+           <img
+             src={URL.createObjectURL(selectedFile)}
+             className='w-full h-full max-w-none object-cover'/>
+       </div>
+         )}
           {/* right section ends here... */}
 
         </div>  
@@ -73,10 +82,10 @@ function App() {
         <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
           <button className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
           <div className='space-x-2'>
-          <input type="file" accept="image/*" ref={fileInput} hidden/>
+          <input type="file" accept="image/*" ref={fileInput} hidden onChange={loadImage}/>
           <button onClick={handleChooseImage} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
           <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px]'>Save Image</button>
-          </div>  
+        </div>  
         </div>
 
 
