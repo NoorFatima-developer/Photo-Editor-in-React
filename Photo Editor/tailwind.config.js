@@ -12,7 +12,9 @@
       colors: {
         background_color: '#E3F2FD',
         customGray: '#ccc',
-        btn_background_color: '#5372f0'
+        btn_background_color: '#5372f0',
+        gray_text: '#6c757d',
+        choose_image: '#464646'
         
       },
     },
