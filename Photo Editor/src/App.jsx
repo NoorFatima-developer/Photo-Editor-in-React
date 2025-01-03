@@ -8,10 +8,6 @@ function App() {
   const fileInput = useRef(null)
   const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
 
-  function handleChooseImage(){
-    fileInput.current.click()
-  }
-
   const loadImage = (e) => {
     const file = e.target.files[0]    // Get the selected file...
     if(!file) return;
@@ -20,9 +16,12 @@ function App() {
     setSelectedFile(newImgurl)
   }
 
-  const resetFilters = () => {
-    console.log("Filters reset");
-    
+  function handleButtonClick(action) {
+    if (action === 'reset') {
+      setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
+    } else if (action === 'choose') {
+      fileInput.current.click(); // Trigger file input click
+    }
   }
 
   return (
@@ -77,7 +76,7 @@ function App() {
           <div className='w-full pl-4 '>
            <img
              src={selectedFile}
-             onLoad={resetfilters}
+            //  onLoad={resetFilters}
              className='w-full h-full max-w-none object-cover'/>
           </div>
          
@@ -89,14 +88,14 @@ function App() {
         {/* last div */}
 
         <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
-          <button className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
+          <button onClick={() => handleButtonClick('reset')}
+        className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
           <div className='space-x-2'>
           <input type="file" accept="image/*" ref={fileInput} hidden onChange={loadImage}/>
-          <button onClick={handleChooseImage} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
+          <button onClick={() => handleButtonClick('choose')} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
           <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px]'>Save Image</button>
         </div>  
         </div>
-
 
       </div>
       {/* Start div ends here */}
