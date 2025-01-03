@@ -6,15 +6,23 @@ import './App.css'
 function App() {
 
   const fileInput = useRef(null)
-  const [selectedFile, setSelectedFile] = useState(0)
+  const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
 
   function handleChooseImage(){
     fileInput.current.click()
   }
 
   const loadImage = (e) => {
-    const file = e.target.files[0]
-    setSelectedFile(file)
+    const file = e.target.files[0]    // Get the selected file...
+    if(!file) return;
+
+    const newImgurl = URL.createObjectURL(file)
+    setSelectedFile(newImgurl)
+  }
+
+  const resetFilters = () => {
+    console.log("Filters reset");
+    
   }
 
   return (
@@ -65,13 +73,14 @@ function App() {
           {/* left section ends here... */}
 
           {/* Right Section */}
-         {selectedFile && (
-           <div className='w-full pl-4 '>
+         
+          <div className='w-full pl-4 '>
            <img
-             src={URL.createObjectURL(selectedFile)}
+             src={selectedFile}
+             onLoad={resetfilters}
              className='w-full h-full max-w-none object-cover'/>
-       </div>
-         )}
+          </div>
+         
           {/* right section ends here... */}
 
         </div>  
