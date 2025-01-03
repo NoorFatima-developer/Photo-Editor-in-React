@@ -5,6 +5,13 @@ import './App.css'
 
 function App() {
 
+  const [isDisabled, setisDisabled] = useState("false");
+
+  function toggleDisable(){
+    setisDisabled(!isDisabled);
+  }
+
+
   return (
     <>
      <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg ' >
@@ -67,9 +74,10 @@ function App() {
         <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
           <button className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
           <div className='space-x-2'>
-          <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
+          <input type="file" accept="image/*"/>
+          <button onClick={toggleDisable} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
           <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px]'>Save Image</button>
-          </div>
+          </div>  
         </div>
 
 
