@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-     <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg ' >
+     <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg ' >
      <div className='w-full mx-8 mt-10'>
         <h2 className=' font-poppins text-xl font-bold mb-8'>Easy Image Editor</h2>
         {/* Main Content */}
