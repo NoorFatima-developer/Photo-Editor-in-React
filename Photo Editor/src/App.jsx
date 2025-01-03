@@ -12,10 +12,10 @@ function App() {
      <div className='w-full mx-8 mt-10'>
         <h2 className=' font-poppins text-xl font-bold mb-8'>Easy Image Editor</h2>
         {/* Main Content */}
-        <div className='flex justify-between'>
+        <div className='flex lg:flex-row md:flex-col justify-between'>
           {/* Left Section */}
 
-          <div className=' border-customGray border-[1px] rounded-md p-4 space-y-5'>
+          <div className=' border-customGray border-[1px] rounded-md p-4 space-y-5 lg:w-1/2'>
           {/* Filter wali div */}
 
           <div className='w-[225px] h-[130px] font-poppins'>
@@ -53,10 +53,10 @@ function App() {
           {/* left section ends here... */}
 
           {/* Right Section */}
-          <div className='w-full pl-4'>
+          <div className='w-full pl-4 '>
               <img
                 src="./src/assets/image-placeholder.svg"
-                className='w-full'/>
+                className='w-full h-auto max-w-none object-cover'/>
           </div>
           {/* right section ends here... */}
 
@@ -65,7 +65,7 @@ function App() {
 
         {/* last div */}
 
-        <div className='flex flex-row justify-between mb-8 font-poppins'>
+        <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
           <button className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
           <div className='space-x-2'>
           <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
