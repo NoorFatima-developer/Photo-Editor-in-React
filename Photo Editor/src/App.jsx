@@ -5,9 +5,16 @@ import './App.css'
 
 function App() {
 
+  // choose file...
   const fileInput = useRef(null)
   const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
+  const [brightness, setBrightness] = useState(100); // Slider value ke liye state
 
+  const handleSliderChange = (e) => {
+    setBrightness(e.target.value);
+  }
+
+  // load image
   const loadImage = (e) => {
     const file = e.target.files[0]    // Get the selected file...
     if(!file) return;
@@ -16,6 +23,7 @@ function App() {
     setSelectedFile(newImgurl)
   }
 
+  // choose and reset image...
   function handleButtonClick(action) {
     if (action === 'reset') {
       setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
@@ -53,7 +61,7 @@ function App() {
               <p>Brightness</p>
               <p>100%</p>
               </div>
-              <input type="range" min="0" max="200" value="100" className='w-full accent-btn_background_color'></input>
+              <input onChange={handleSliderChange} value={brightness} type="range" min="0" max="200" className='w-full accent-btn_background_color'></input>
           </div>
 
           {/* Rotate and Flip wali div */}
