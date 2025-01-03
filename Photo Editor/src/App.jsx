@@ -8,22 +8,23 @@ function App() {
 
   return (
     <>
-      <div>
-        <h2>Easy Image Editor</h2>
+     <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] ' >
+     <div className='ml-0'>
+        <h2 className=' font-poppins text-xl font-bold mb-8'>Easy Image Editor</h2>
         {/* Main Content */}
-        <div>
+        <div className='flex flex-row'>
           {/* Left Section */}
 
-          <div>
+          <div className=' border-customGray border-[1px] rounded-md p-4 space-y-5'>
           {/* Filter wali div */}
 
           <div>
-            <p>Filters</p>
-            <div>
-            <button>Brightness</button> 
-            <button>Saturation</button> 
-            <button>Inversion</button> 
-            <button>Grayscale</button> 
+            <p className='mb-2'>Filters</p>
+            <div className='flex flex-wrap justify-between'>
+            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28'>Brightness</button> 
+            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28'>Saturation</button> 
+            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28'>Inversion</button> 
+            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28'>Grayscale</button> 
             </div>
           </div>
 
@@ -70,7 +71,8 @@ function App() {
 
       </div>
       {/* Start div ends here */}
-    </>
+     </section>
+    </> 
   )
 }
 
