@@ -9,8 +9,11 @@ function App() {
   const fileInput = useRef(null)
   const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
   const [brightness, setBrightness] = useState(100); // Slider value ke liye state
+  const [Saturation, setSaturation] = useState(100); 
+  const [inversion, setInversion] = useState(0); 
+  const [contrast, setContrast] = useState(0);  
   const [isDisabled, setisDisabled] = useState(true); 
-  const [activeFilter, setActiveFilter] = useState(null); 
+  const [activeFilter, setActiveFilter] = useState('brightness'); 
 
     // 02---load image
     const loadImage = (e) => {
