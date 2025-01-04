@@ -57,10 +57,16 @@ function App() {
           <div className='w-[225px] h-[130px] font-poppins'>
             <p className='mb-4 text-sm'>Filters</p>
             <div className='grid grid-cols-2 gap-x-4 gap-y-2'>
-            <button className='h-10 text-md text-white rounded-sm border border-gray-400 w-28 bg-btn_background_color'>Brightness</button> 
+            {/* <button className='h-10 text-md text-white rounded-sm border border-gray-400 w-28 bg-btn_background_color'>Brightness</button> 
             <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Saturation</button> 
             <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Inversion</button> 
-            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Grayscale</button> 
+            <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Grayscale</button>  */}
+            {['brightness', 'saturation', 'inversion', 'grayscale'].map((filter)=>{
+              <button 
+              key={filter}
+              className={`h-10 text-md text-white rounded-sm border border-gray-400 w-28 ${activeFilter === filter ? 'text-white bg-btn_background_color' : 'text-gray-500 hover:text-white hover:bg-btn_background_color transition-all duration-200' }`}
+              onClick={()=> handleFilterClick(filter)}></button>
+            })}
             </div>
           </div>
 
