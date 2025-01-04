@@ -9,9 +9,9 @@ function App() {
   const fileInput = useRef(null)
   const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
   const [brightness, setBrightness] = useState(100); // Slider value ke liye state
-  const [Saturation, setSaturation] = useState(100); 
+  const [saturation, setSaturation] = useState(100); 
   const [inversion, setInversion] = useState(0); 
-  const [contrast, setContrast] = useState(0);  
+  const [grayscale, setGrayscale] = useState(0);  
   const [isDisabled, setisDisabled] = useState(true); 
   const [activeFilter, setActiveFilter] = useState('brightness');  //active filter state...
 
@@ -36,10 +36,34 @@ function App() {
     setisDisabled(true); // Disable the reset button
 
   }
+
     //04-- Brightness slider change..
   const handleSliderChange = (e) => {
     setBrightness(e.target.value);
   }
+
+  //05-- Handle Filter Click..
+
+  function handleFilterClick(filter) {
+    setActiveFilter(filter);
+  }
+
+
+  // function handleFilterClick(e) {
+  //   const value = e.target.value;
+  //   if(activeFilter === 'brightness') {
+  //     setBrightness(value);
+  //   }
+  //   if(activeFilter === 'saturation') {
+  //     setSaturation(value);
+  //   }
+  //   if(activeFilter === 'inversion') {
+  //     setInversion(value);
+  //   }
+  //   if(activeFilter === 'grayscale') {
+  //     setGrayscale(value);
+  //   }
+  // }
 
   return (
 
@@ -56,17 +80,19 @@ function App() {
 
           <div className='w-[225px] h-[130px] font-poppins'>
             <p className='mb-4 text-sm'>Filters</p>
-            <div className='grid grid-cols-2 gap-x-4 gap-y-2'>
+            <div className='grid grid-cols-2 gap-x-4 gap-y-2 '>
             {/* <button className='h-10 text-md text-white rounded-sm border border-gray-400 w-28 bg-btn_background_color'>Brightness</button> 
             <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Saturation</button> 
             <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Inversion</button> 
             <button className='h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 hover:text-white hover:bg-btn_background_color transition-all duration-200'>Grayscale</button>  */}
-            {['brightness', 'saturation', 'inversion', 'grayscale'].map((filter)=>{
+            {['brightness', 'saturation', 'inversion', 'grayscale'].map((filter)=>(
               <button 
               key={filter}
-              className={`h-10 text-md text-white rounded-sm border border-gray-400 w-28 ${activeFilter === filter ? 'text-white bg-btn_background_color' : 'text-gray-500 hover:text-white hover:bg-btn_background_color transition-all duration-200' }`}
-              onClick={()=> handleFilterClick(filter)}></button>
-            })}
+              className={`h-10 text-md text-gray-500 rounded-sm border border-gray-400 w-28 ${activeFilter === filter ? 'text-white bg-btn_background_color' : 'text-gray-500 hover:text-white hover:bg-btn_background_color transition-all duration-200' }`}
+              onClick={()=> handleFilterClick(filter)}>
+               {filter.charAt(0).toUpperCase() + filter.slice(1)}
+              </button>
+            ))}
             </div>
           </div>
 
