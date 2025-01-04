@@ -37,7 +37,6 @@ function App() {
 
   }
 
-
   //05-- Handle Filter Click..
 
   function handleFilterClick(filter) {
@@ -60,6 +59,12 @@ function App() {
       setGrayscale(value);
     }
   }
+
+  // 07-- Applying CSS Filter to Image...
+
+  const filterStyles = {
+    filter: `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`,
+  };
 
   return (
 
@@ -105,9 +110,9 @@ function App() {
               </div>
               <input 
               onChange={handleSliderChange} 
-              value={activeFilter === 'brightness' ? 'brightness' 
-               : activeFilter === 'saturation' ? 'saturation'
-               : activeFilter === 'inversion'? 'inversion'
+              value={activeFilter === 'brightness' ? brightness 
+               : activeFilter === 'saturation' ? saturation
+               : activeFilter === 'inversion'? inversion
                : grayscale} 
                 type="range" 
                 min="0" 
@@ -136,6 +141,7 @@ function App() {
           <div className='w-full pl-4 '>
            <img
              src={selectedFile}
+             style={filterStyles}
             //  onLoad={resetFilters}
              className='w-full h-full max-w-none object-cover'/>
           </div>
