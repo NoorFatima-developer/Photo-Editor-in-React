@@ -13,7 +13,7 @@ function App() {
   const [inversion, setInversion] = useState(0); 
   const [contrast, setContrast] = useState(0);  
   const [isDisabled, setisDisabled] = useState(true); 
-  const [activeFilter, setActiveFilter] = useState('brightness'); 
+  const [activeFilter, setActiveFilter] = useState('brightness');  //active filter state...
 
     // 02---load image
     const loadImage = (e) => {
