@@ -37,10 +37,6 @@ function App() {
 
   }
 
-    //04-- Brightness slider change..
-  const handleSliderChange = (e) => {
-    setBrightness(e.target.value);
-  }
 
   //05-- Handle Filter Click..
 
@@ -48,22 +44,22 @@ function App() {
     setActiveFilter(filter);
   }
 
-
-  // function handleFilterClick(e) {
-  //   const value = e.target.value;
-  //   if(activeFilter === 'brightness') {
-  //     setBrightness(value);
-  //   }
-  //   if(activeFilter === 'saturation') {
-  //     setSaturation(value);
-  //   }
-  //   if(activeFilter === 'inversion') {
-  //     setInversion(value);
-  //   }
-  //   if(activeFilter === 'grayscale') {
-  //     setGrayscale(value);
-  //   }
-  // }
+  // 06-- Set activerFiler valeues according to selected filter...
+  function handleSliderChange(e) {
+    const value = e.target.value;
+    if(activeFilter === 'brightness') {
+      setBrightness(value);
+    }
+    if(activeFilter === 'saturation') {
+      setSaturation(value);
+    }
+    if(activeFilter === 'inversion') {
+      setInversion(value);
+    }
+    if(activeFilter === 'grayscale') {
+      setGrayscale(value);
+    }
+  }
 
   return (
 
@@ -99,10 +95,25 @@ function App() {
           {/* Brightness wali div */}
           <div>
               <div className='flex justify-between mb-2 font-poppins'>
-              <p>Brightness</p>
-              <p>100%</p>
+              <p>{activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)}</p>
+              <p>
+                {activeFilter === 'brightness' ? `${brightness}%` :
+                activeFilter ==='saturation'? `${saturation}%` :
+                activeFilter === 'inversion'? `${inversion}%` :
+                `${grayscale}%`}
+              </p>
               </div>
-              <input onChange={handleSliderChange} value={brightness} type="range" min="0" max="200" className='w-full accent-btn_background_color'></input>
+              <input 
+              onChange={handleSliderChange} 
+              value={activeFilter === 'brightness' ? 'brightness' 
+               : activeFilter === 'saturation' ? 'saturation'
+               : activeFilter === 'inversion'? 'inversion'
+               : grayscale} 
+                type="range" 
+                min="0" 
+                max={activeFilter === 'brightness' || activeFilter === 'saturation' ? '200' : '100'}
+                className='w-full accent-btn_background_color'>
+              </input>
           </div>
 
           {/* Rotate and Flip wali div */}
