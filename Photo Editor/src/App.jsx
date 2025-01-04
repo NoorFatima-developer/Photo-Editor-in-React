@@ -17,7 +17,7 @@ function App() {
   const [rotate, setRotate] = useState(0)
   const [flipVertical, setFlipVertical] = useState(false);
   const [flipHorizontal, setFlipHorizontal] = useState(false);
-  const [saveImage, setSaveImage] = useState([])
+  const [savedImages, setSavedImages] = useState([])
 
     // 02---load image
     const loadImage = (e) => {
@@ -93,6 +93,45 @@ function App() {
   function handleFlipHorizontal() {
     setFlipHorizontal(prev => !prev); // Toggle horizontal flip
   }
+
+  // 08-- Save Image, Store Image and Downloaded Image...
+
+  function handleSaveImage() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = selectedFile;
+  
+    img.onload = () => {
+      // Set canvas size to match the image size
+      canvas.width = img.width;
+      canvas.height = img.height;
+  
+      // Apply the filters and transformations on the canvas context
+      ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
+  
+      // Apply rotation (convert angle to radians)
+      ctx.save(); // Save current context state
+      ctx.translate(canvas.width / 2, canvas.height / 2); // Move to center of canvas
+      ctx.rotate((rotate * Math.PI) / 180); // Apply rotation (in radians)
+      ctx.drawImage(img, -img.width / 2, -img.height / 2); // Draw image at center of canvas
+      ctx.restore(); // Restore the context state to avoid affecting other transformations
+  
+      // Save the modified image to the savedImages state
+      const dataUrl = canvas.toDataURL('image/png');
+      setSavedImages((prevImages) => [...prevImages, dataUrl]);
+  
+      // Trigger the download
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = 'saved-image.png';
+      link.click();
+  
+      alert('Image saved and downloaded!');
+    };
+  }
+  
+  
 
   return (
 
@@ -190,12 +229,25 @@ function App() {
           <div className='space-x-2'>
           <input type="file" accept="image/*" ref={fileInput} hidden onChange={loadImage}/>
           <button onClick={() => handleButtonClick('choose')} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
-          <button className={`text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px] ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>Save Image</button>
+          <button onClick={handleSaveImage} className={`text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px] ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>Save Image</button>
         </div>  
         </div>
+      
       </div>
       {/* Start div ends here */}
      </section>
+     <div className="mt-8 flex justify-end">
+            <div className="grid grid-cols-10 gap-4">
+              {savedImages.map((img, index) => (
+                <img 
+                key={index} 
+                src={img} 
+                alt={`Saved Image ${index}`} 
+                className="w-full h-32 object-cover rounded-md" />
+              ))}
+            </div>
+        </div>
+     
     </> 
   )
 }
