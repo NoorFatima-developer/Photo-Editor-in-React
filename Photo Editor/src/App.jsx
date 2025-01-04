@@ -17,6 +17,7 @@ function App() {
   const [rotate, setRotate] = useState(0)
   const [flipVertical, setFlipVertical] = useState(false);
   const [flipHorizontal, setFlipHorizontal] = useState(false);
+  const [saveImage, setSaveImage] = useState([])
 
     // 02---load image
     const loadImage = (e) => {
@@ -168,7 +169,10 @@ function App() {
           <div className='w-full pl-4 '>
            <img
              src={selectedFile}
-             style={filterStyles}
+             style={{
+              ...filterStyles,
+              ...filterTransform,
+             }}
             //  onLoad={resetFilters}
              className='w-full h-full max-w-none object-cover'/>
           </div>
