@@ -20,10 +20,19 @@ function App() {
   const [savedImages, setSavedImages] = useState([])
 
 
-      // 02--choose and reset image...
+    // 02--choose and reset image...
   function handleButtonClick(action) {
     if (action === 'reset') {
       setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
+      fileInput.current.value = ''; 
+    // Reset all filters and transformations
+    setBrightness(100);
+    setSaturation(100);
+    setInversion(0);
+    setGrayscale(0);
+    setRotate(0);
+    setFlipVertical(false);
+    setFlipHorizontal(false);
     } else if (action === 'choose') {
       fileInput.current.click(); // Trigger file input click
     }
@@ -41,7 +50,7 @@ function App() {
       setisDisabled(false); // Enable the reset button
     }
 
-  //04-- Handle Filter Click..
+    //04-- Handle Filter Click..
 
   function handleFilterClick(filter) {
     setActiveFilter(filter);
@@ -111,10 +120,16 @@ function App() {
       // Apply the filters and transformations on the canvas context
       ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
   
-      // Apply rotation (convert angle to radians)
+      // Apply rotation and flip (convert angle to radians)
       ctx.save(); // Save current context state
       ctx.translate(canvas.width / 2, canvas.height / 2); // Move to center of canvas
-      ctx.rotate((rotate * Math.PI) / 180); // Apply rotation (in radians)
+  
+      // Apply rotation (in radians)
+      ctx.rotate((rotate * Math.PI) / 180); 
+  
+      // Apply flips
+      ctx.scale(flipHorizontal ? -1 : 1, flipVertical ? -1 : 1);
+  
       ctx.drawImage(img, -img.width / 2, -img.height / 2); // Draw image at center of canvas
       ctx.restore(); // Restore the context state to avoid affecting other transformations
   
@@ -131,8 +146,7 @@ function App() {
       alert('Image saved and downloaded!');
     };
   }
-  
-  
+
 
   return (
 
@@ -181,7 +195,7 @@ function App() {
               value={activeFilter === 'brightness' ? brightness 
                : activeFilter === 'saturation' ? saturation
                : activeFilter === 'inversion'? inversion
-               : grayscale} 
+               : activeFilter === 'grayscale' ? grayscale : ""} 
                 type="range" 
                 min="0" 
                 max={activeFilter === 'brightness' || activeFilter === 'saturation' ? '200' : '100'}
@@ -251,8 +265,7 @@ function App() {
               ))}
             </div>
         </div>
-     
-    </> 
+     </> 
   )
 }
 
