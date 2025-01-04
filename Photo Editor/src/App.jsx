@@ -5,44 +5,50 @@ import './App.css'
 
 function App() {
 
-  // choose file...
+  // 01---choose file...
   const fileInput = useRef(null)
   const [selectedFile, setSelectedFile] = useState('./src/assets/image-placeholder.svg')
   const [brightness, setBrightness] = useState(100); // Slider value ke liye state
+  const [isDisabled, setisDisabled] = useState(true); 
+  const [activeFilter, setActiveFilter] = useState(null); 
 
-  const handleSliderChange = (e) => {
-    setBrightness(e.target.value);
-  }
+    // 02---load image
+    const loadImage = (e) => {
+      e.preventDefault()  // Prevent form submission...
+      const file = e.target.files[0]    // Get the selected file...
+      if(!file) return;
+  
+      const newImgurl = URL.createObjectURL(file)
+      setSelectedFile(newImgurl)
+      setisDisabled(false); // Enable the reset button
+    }
 
-  // load image
-  const loadImage = (e) => {
-    const file = e.target.files[0]    // Get the selected file...
-    if(!file) return;
-
-    const newImgurl = URL.createObjectURL(file)
-    setSelectedFile(newImgurl)
-  }
-
-  // choose and reset image...
+      // 03--choose and reset image...
   function handleButtonClick(action) {
     if (action === 'reset') {
       setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
     } else if (action === 'choose') {
       fileInput.current.click(); // Trigger file input click
     }
+    setisDisabled(true); // Disable the reset button
+
+  }
+    //04-- Brightness slider change..
+  const handleSliderChange = (e) => {
+    setBrightness(e.target.value);
   }
 
   return (
 
     <>
-     <section className='w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg ' >
+     <section className="w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg">
      <div className='w-full mx-8 mt-10'>
         <h2 className=' font-poppins text-xl font-bold mb-8'>Easy Image Editor</h2>
         {/* Main Content */}
-        <div className='flex lg:flex-row md:flex-col justify-between'>
+        <div className="flex lg:flex-row md:flex-col justify-between">
           {/* Left Section */}
 
-          <div className=' border-customGray border-[1px] rounded-md p-4 space-y-5 lg:w-1/2'>
+          <div className={` border-customGray border-[1px] rounded-md p-4 space-y-5 lg:w-1/2 ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>
           {/* Filter wali div */}
 
           <div className='w-[225px] h-[130px] font-poppins'>
@@ -97,13 +103,14 @@ function App() {
 
         <div className='flex lg:flex-row flex-col justify-between mb-8 font-poppins'>
           <button onClick={() => handleButtonClick('reset')}
-        className='text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10'>Reset Filters</button>
+        className={`text-gray_text border border-gray-400 rounded-sm p-2 mt-4 uppercase text-[14px] h-10} ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>Reset Filters</button>
           <div className='space-x-2'>
           <input type="file" accept="image/*" ref={fileInput} hidden onChange={loadImage}/>
           <button onClick={() => handleButtonClick('choose')} className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-choose_image uppercase text-[14px]'>Choose Image</button>
-          <button className='text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px]'>Save Image</button>
+          <button className={`text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px] ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>Save Image</button>
         </div>  
         </div>
+
 
       </div>
       {/* Start div ends here */}
