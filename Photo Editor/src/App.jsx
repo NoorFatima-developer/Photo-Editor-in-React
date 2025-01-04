@@ -37,7 +37,6 @@ function App() {
       fileInput.current.click(); // Trigger file input click
     }
     setisDisabled(true); // Disable the reset button
-
   }
 
   //04-- Handle Filter Click..
@@ -72,11 +71,27 @@ function App() {
   // 07-- Applying CSS Transform to Image...
 
   const filterTransform = {
-    transform: `rotate(${rotate}deg) 
-                scaleX(${flipHorizontal ? -1 : 1}) 
-                scaleY(${flipVertical ? -1 : 1})`,
+    transform: 
+    `rotate(${rotate}deg) 
+     scaleX(${flipHorizontal ? -1 : 1}) 
+     scaleY(${flipVertical ? -1 : 1})`,
   };
 
+  function handleRotateLeft(){
+    setRotate(prevRotate => prevRotate - 90)
+  }
+
+  function handleRotateRight() {
+    setRotate(prevRotate => prevRotate + 90); // Rotate right by 90 degrees
+  }
+
+  function handleFlipVertical() {
+    setFlipVertical(prev => !prev); // Toggle vertical flip
+  }
+
+  function handleFlipHorizontal() {
+    setFlipHorizontal(prev => !prev); // Toggle horizontal flip
+  }
 
   return (
 
@@ -138,10 +153,10 @@ function App() {
           <div className='text-xl font-poppins '>
           <p className='mt-[-20px] mb-8'>Rotate & Flip</p>
               <div className='space-x-1 flex'>
-                  <button className='rounded-sm border border-gray-400 w-14 h-9'><i class = "fa-solid fa-rotate-left"></i></button>
-                  <button className='rounded-sm border border-gray-400 w-14 h-9'><i class = "fa-solid fa-rotate-right"></i></button>
-                  <button className='rounded-sm border border-gray-400 w-14 h-9'><i class='bx bx-reflect-vertical'></i></button>
-                  <button className='rounded-sm border border-gray-400 w-14 h-9'><i class='bx bx-reflect-horizontal'></i></button>
+                  <button onClick={handleRotateLeft} className='rounded-sm border border-gray-400 w-14 h-9'><i class = "fa-solid fa-rotate-left"></i></button>
+                  <button onClick={handleRotateRight} className='rounded-sm border border-gray-400 w-14 h-9'><i class = "fa-solid fa-rotate-right"></i></button>
+                  <button onClick={handleFlipVertical} className='rounded-sm border border-gray-400 w-14 h-9'><i class='bx bx-reflect-vertical'></i></button>
+                  <button onClick={handleFlipHorizontal} className='rounded-sm border border-gray-400 w-14 h-9'><i class='bx bx-reflect-horizontal'></i></button>
               </div>   
           </div>
 
@@ -174,8 +189,6 @@ function App() {
           <button className={`text-white border border-gray-400 rounded-md p-2 mt-4 bg-btn_background_color uppercase text-[14px] ${isDisabled ? 'pointer-events-none opacity-60': ""}`}>Save Image</button>
         </div>  
         </div>
-
-
       </div>
       {/* Start div ends here */}
      </section>
