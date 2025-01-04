@@ -14,6 +14,9 @@ function App() {
   const [grayscale, setGrayscale] = useState(0);  
   const [isDisabled, setisDisabled] = useState(true); 
   const [activeFilter, setActiveFilter] = useState('brightness');  //active filter state...
+  const [rotate, setRotate] = useState(0)
+  const [flipVertical, setFlipVertical] = useState(false);
+  const [flipHorizontal, setFlipHorizontal] = useState(false);
 
     // 02---load image
     const loadImage = (e) => {
@@ -37,13 +40,13 @@ function App() {
 
   }
 
-  //05-- Handle Filter Click..
+  //04-- Handle Filter Click..
 
   function handleFilterClick(filter) {
     setActiveFilter(filter);
   }
 
-  // 06-- Set activerFiler valeues according to selected filter...
+  // 05-- Set activerFiler valeues according to selected filter...
   function handleSliderChange(e) {
     const value = e.target.value;
     if(activeFilter === 'brightness') {
@@ -60,11 +63,20 @@ function App() {
     }
   }
 
-  // 07-- Applying CSS Filter to Image...
+  // 06-- Applying CSS Filter to Image...
 
   const filterStyles = {
     filter: `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`,
   };
+
+  // 07-- Applying CSS Transform to Image...
+
+  const filterTransform = {
+    transform: `rotate(${rotate}deg) 
+                scaleX(${flipHorizontal ? -1 : 1}) 
+                scaleY(${flipVertical ? -1 : 1})`,
+  };
+
 
   return (
 
