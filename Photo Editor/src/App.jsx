@@ -19,7 +19,18 @@ function App() {
   const [flipHorizontal, setFlipHorizontal] = useState(false);
   const [savedImages, setSavedImages] = useState([])
 
-    // 02---load image
+
+      // 02--choose and reset image...
+  function handleButtonClick(action) {
+    if (action === 'reset') {
+      setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
+    } else if (action === 'choose') {
+      fileInput.current.click(); // Trigger file input click
+    }
+    setisDisabled(true); // Disable the reset button
+  }
+
+    // 03---load image
     const loadImage = (e) => {
       e.preventDefault()  // Prevent form submission...
       const file = e.target.files[0]    // Get the selected file...
@@ -29,16 +40,6 @@ function App() {
       setSelectedFile(newImgurl)
       setisDisabled(false); // Enable the reset button
     }
-
-      // 03--choose and reset image...
-  function handleButtonClick(action) {
-    if (action === 'reset') {
-      setSelectedFile('./src/assets/image-placeholder.svg'); // Reset to default image
-    } else if (action === 'choose') {
-      fileInput.current.click(); // Trigger file input click
-    }
-    setisDisabled(true); // Disable the reset button
-  }
 
   //04-- Handle Filter Click..
 
@@ -136,8 +137,8 @@ function App() {
   return (
 
     <>
-     <section className="w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[500px] rounded-lg shadow-lg">
-     <div className='w-full mx-8 mt-10'>
+<section className="w-full max-w-[850px] flex mx-auto items-center justify-center bg-white mt-28 min-h-[200px] rounded-lg shadow-lg">
+<div className='w-full mx-8 mt-10'>
         <h2 className=' font-poppins text-xl font-bold mb-8'>Easy Image Editor</h2>
         {/* Main Content */}
         <div className="flex lg:flex-row md:flex-col justify-between">
@@ -213,7 +214,10 @@ function App() {
               ...filterTransform,
              }}
             //  onLoad={resetFilters}
-             className='w-full h-full max-w-none object-cover'/>
+            className={`w-full h-[400px] max-w-none rounded-lg ${
+              selectedFile === './src/assets/image-placeholder.svg' ? 'object-cover' : 'object-contain'
+            }`}             
+            />
           </div>
          
           {/* right section ends here... */}
